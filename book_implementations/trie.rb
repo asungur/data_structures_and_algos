@@ -48,6 +48,7 @@ class Trie
       end
     # After inserting the entire word into the trie,
     # we add * key at the end:
+    end
     current_node.children["*"] = nil
   end
 
