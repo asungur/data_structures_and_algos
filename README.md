@@ -1,3 +1,23 @@
-# data_structures_and_algos
+# ➗Data Structures and Algorithms
 
-All relevant data structure and algorithm questions for an engineering interview
+This repository contains my solutions to popular algorithms and data structures.
+
+My plan is to implement each solution in **Go** and **Ruby.** However, some problems might only have one implementation.
+
+Some problems include variations. These are kept in the same folder.
+
+## Algorithms
+
+---
+
+[Definition](https://en.wikipedia.org/wiki/Algorithm)
+
+Basically, a set of rules to solve a given problem. Commonly, they work hand in hand with data structures.
+
+## Data Structures
+
+---
+
+[Definition](https://en.wikipedia.org/wiki/Data_structure)
+
+Depending on the actual problem, using different data structures bring efficiency (speed/memory) to our solution. Understanding their trade-offs and where to use them is as important as understanding how they work.
