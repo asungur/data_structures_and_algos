@@ -12,6 +12,7 @@ Some problems include variations. These are kept in the same folder.
 
 Set of rules to solve a given problem. Commonly, they work hand in hand with data structures.
 
+- [Binary Search](https://github.com/asungur/data_structures_and_algos/tree/master/algorithms/binary_search) | [wiki](https://en.wikipedia.org/wiki/Binary_search_algorithm)
 
 ## Data Structures
 
