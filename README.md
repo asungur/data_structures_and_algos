@@ -15,6 +15,7 @@ Set of rules to solve a given problem. Commonly, they work hand in hand with dat
 - [Binary Search](https://github.com/asungur/data_structures_and_algos/tree/master/algorithms/binary_search) | [wiki](https://en.wikipedia.org/wiki/Binary_search_algorithm)
 - [Bubble Sort](https://github.com/asungur/data_structures_and_algos/tree/master/algorithms/bubble_sort) | [wiki](https://en.wikipedia.org/wiki/Bubble_sort)
 - [Selection Sort](https://github.com/asungur/data_structures_and_algos/tree/master/algorithms/selection_sort) | [wiki](https://en.wikipedia.org/wiki/Selection_sort)
+- [Insertion Sort](https://github.com/asungur/data_structures_and_algos/tree/master/algorithms/insertion_sort) | [wiki](https://en.wikipedia.org/wiki/Insertion_sort)
 
 ## Data Structures
 
