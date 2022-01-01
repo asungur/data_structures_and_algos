@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type node struct {
 	data int
@@ -17,6 +20,23 @@ func (l *linkedList) prepend(n *node) {
 	l.head = n
 	l.head.next = secondNode
 	l.length++
+}
+
+func (l *linkedList) insertAtIndex(index, value int) {
+	currentNode := l.head
+	newNode := &node{data: value}
+
+	for i := 0; i < l.length; i++ {
+		if index == i+1 {
+			newNextNext := currentNode.next
+			currentNode.next = newNode
+			newNode.next = newNextNext
+			l.length++
+			break
+		} else {
+			currentNode = currentNode.next
+		}
+	}
 }
 
 func (l linkedList) printData() {
@@ -50,6 +70,32 @@ func (l *linkedList) deleteByValue(value int) {
 	l.length--
 }
 
+func (l *linkedList) readAtIndex(index int) (int, error) {
+	currentNode := l.head
+
+	for i := 0; i < l.length; i++ {
+		if index == i {
+			return currentNode.data, nil
+		} else {
+			currentNode = currentNode.next
+		}
+	}
+	return -1, errors.New("Index out of range")
+}
+
+func (l *linkedList) indexOfValue(value int) (int, error) {
+	currentNode := l.head
+
+	for i := 0; i < l.length; i++ {
+		if value == currentNode.data {
+			return i, nil
+		} else {
+			currentNode = currentNode.next
+		}
+	}
+	return -1, errors.New("Value is not in the linked list")
+}
+
 func main() {
 	myList := linkedList{}
 	node1 := &node{data: 200}
@@ -63,10 +109,13 @@ func main() {
 	myList.prepend(node4)
 	myList.prepend(node5)
 
+	// myList.insertAtIndex(2, 300)
+	// myList.printData()
+
 	// myList.deleteByValue(900)
 	// myList.deleteByValue(999) // shouldn't break
 	// myList.deleteByValue(13) // head deletion should work
-	myList.printData()
+	// myList.printData()
 
 	// emptyList := linkedList{}
 	// emptyList.deleteByValue(900)
