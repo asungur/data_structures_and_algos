@@ -1,10 +1,18 @@
 class TreeNode
-  attr_accessor :value, :left_child, :right_child
-
   def initialize(value, left=nil, right=nil)
     @value = value
     @left_child = left
     @right_child = right
+  end
+end
+
+def search(search_value, node)
+  if node.nil? || node.value == search_value
+    return node
+  elsif search_value < node.value
+    return search(search_value, node.left_child)
+  else
+    return search(search_value, node.right_child)
   end
 end
 
@@ -23,6 +31,37 @@ def insert(value, node)
     end
   else
     insert(value, node.right_child)
+  end
+end
+
+def delete(value_to_delete, node)
+  if node.nil?
+    return nil
+  elsif value_to_delete < node.value
+    node.left_child = delete(value_to_delete, node.left_child)
+    return node
+  elsif value_to_delete > node.value
+    node.right_child = delete(value_to_delete, node.right_child)
+    return node
+  elsif value_to_delete == node.value
+    if node.left_child.nil?
+      return node.right_child
+    elsif node.right_child.nil?
+      return node.left_child
+    else
+      node.right_child = lift(node.right_child, node)
+      return node
+    end
+  end
+end
+
+def lift(node, node_to_delete)
+  if node.left_child
+    node.left_child = lift(node.left_child, node_to_delete)
+    return node
+  else
+    node_to_delete.value = node.value
+    return node.right_child
   end
 end
 
@@ -49,6 +88,19 @@ def post_order_traversal(tree_node)
     puts tree_node.value
   end
 end
+
+node1 = TreeNode.new(25)
+node2 = TreeNode.new(75)
+root = TreeNode.new(50, node1, node2)
+
+def traverse_and_print(node)
+  return if node.nil?
+
+  traverse_and_print(node.left_child)
+  puts node.value
+  traverse_and_print(node.right_child)
+end
+
 
 # MANUALLY CONSTRUCT A PERFECT BINARY SEARCH TREE
 l4_1 = TreeNode.new(4)
