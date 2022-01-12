@@ -10,7 +10,7 @@ func BinarySearch(sortedNums []int, value int) (midpoint int, err error) {
 	upperBound := len(sortedNums) - 1
 
 	for lowerBound <= upperBound {
-		midpoint = (upperBound + lowerBound) / 2
+		midpoint = (lowerBound + (upperBound - lowerBound)) / 2
 
 		valueAtMid := sortedNums[midpoint]
 		if value == valueAtMid {
