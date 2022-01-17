@@ -14,10 +14,12 @@ Set of rules to solve a given problem. Commonly, they work hand in hand with dat
 
 - [Binary Search](https://github.com/asungur/data_structures_and_algos/tree/master/algorithms/binary_search) | [wiki](https://en.wikipedia.org/wiki/Binary_search_algorithm)
 - [Bubble Sort](https://github.com/asungur/data_structures_and_algos/tree/master/algorithms/bubble_sort) | [wiki](https://en.wikipedia.org/wiki/Bubble_sort)
+- [Merge Sort](https://github.com/asungur/data_structures_and_algos/tree/master/algorithms/merge_sort) | [wiki](https://en.wikipedia.org/wiki/Merge_sort)
 - [Selection Sort](https://github.com/asungur/data_structures_and_algos/tree/master/algorithms/selection_sort) | [wiki](https://en.wikipedia.org/wiki/Selection_sort)
 - [Insertion Sort](https://github.com/asungur/data_structures_and_algos/tree/master/algorithms/insertion_sort) | [wiki](https://en.wikipedia.org/wiki/Insertion_sort)
 - [Quicksort](https://github.com/asungur/data_structures_and_algos/tree/master/algorithms/quicksort) | [wiki](https://en.wikipedia.org/wiki/Quicksort)
 - [Quickselect](https://github.com/asungur/data_structures_and_algos/tree/master/algorithms/quickselect) | [wiki](https://en.wikipedia.org/wiki/Quickselect)
+
 
 ## Data Structures
 
