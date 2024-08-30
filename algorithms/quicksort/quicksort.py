@@ -45,8 +45,30 @@ class SortableArray:
         self.quicksort(left, pivot_index-1)
         self.quicksort(pivot_index+1, right)
 
+    def quickselect(self, kth_lowest, left, right):
+        # If the subarr has one cell return the value
+        if right - left <= 0:
+            return self.array[left]
+        # Partition the array and grab the left index as the pivot:
+        pivot_index = self.partition(left, right)
+        # If the kth is left of the pivot:
+        if kth_lowest < pivot_index:
+            # Recursively quickselect on the left subarr:
+            return self.quickselect(kth_lowest, left, pivot_index-1)
+        # If the kth is right of the pivot:
+        elif kth_lowest > pivot_index:
+            # Recursively quickselect on the right subarr:
+            return self.quickselect(kth_lowest, pivot_index+1, right)
+        else:
+            # kth_lowest == pivot_index
+            return self.array[pivot_index]
 
-arr = [0,5,2,1,6,3]
+
+# arr = [0,5,2,1,6,3]
+# s_arr = SortableArray(arr)
+# s_arr.quicksort(0,len(s_arr.array)-1)
+# print(s_arr.array)
+
+arr = [0, 50, 20, 10, 60, 30]
 s_arr = SortableArray(arr)
-s_arr.quicksort(0,len(s_arr.array)-1)
-print(s_arr.array)
+print(s_arr.quickselect(1, 0, len(s_arr.array)-1))
