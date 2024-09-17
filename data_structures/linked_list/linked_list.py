@@ -48,6 +48,21 @@ class LinkedList:
         new_node.next_node = current_node.next_node
         current_node.next_node = new_node
 
+    def delete_at_index(self, index):
+        # Deleting the first node:
+        if index == 0:
+            self.first_node = self.first_node.next_node
+            return
+        # Deleting any other node:
+        current_node = self.first_node
+        current_index = 0
+        # Move until 1 node before
+        while current_index < (index - 1):
+            current_node = current_node.next_node
+            current_index += 1
+        node_after_deleted_node = current_node.next_node.next_node
+        current_node.next_node = node_after_deleted_node
+
 
 node_1 = Node("once")
 node_2 = Node("upon")
@@ -60,3 +75,5 @@ list = LinkedList(node_1)
 # print(list.read(2))
 print(list.insert_at_index(3, "baklava"))
 print(list.index_of("baklava"))
+list.delete_at_index(3)
+print(list.index_of("time"))
