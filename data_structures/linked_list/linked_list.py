@@ -30,6 +30,24 @@ class LinkedList:
         # Return None if data is not found:
         return None
 
+    def insert_at_index(self, index, value):
+        new_node = Node(value)
+        # Insert at the beginning
+        if index == 0:
+            new_node.next_node = self.first_node
+            self.first_node = new_node
+            return
+        # Anywhere else:
+        current_node = self.first_node
+        current_index = 0
+        # Move until 1 node before
+        while current_index < (index - 1):
+            current_node = current_node.next_node
+            current_index += 1
+        # Put the new node between this node before and the next
+        new_node.next_node = current_node.next_node
+        current_node.next_node = new_node
+
 
 node_1 = Node("once")
 node_2 = Node("upon")
@@ -40,4 +58,5 @@ node_2.next_node = node_3
 node_3.next_node = node_4
 list = LinkedList(node_1)
 # print(list.read(2))
+print(list.insert_at_index(3, "baklava"))
 print(list.index_of("baklava"))
