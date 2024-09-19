@@ -82,6 +82,9 @@ class LinkedList:
             current_node = upcoming_node
         self.first_node = previous_node
 
+def delete_node_from_list(node):
+    node.data = node.next_node.data
+    node.next_node = node.next_node.next_node
 
 node_1 = Node("once")
 node_2 = Node("upon")
@@ -97,5 +100,5 @@ list = LinkedList(node_1)
 # list.delete_at_index(3)
 # print(list.index_of("time"))
 # list.print_all()
-list.reverse()
+delete_node_from_list(node_2)
 list.print_all()
