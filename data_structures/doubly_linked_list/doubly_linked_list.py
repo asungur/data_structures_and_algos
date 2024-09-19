@@ -20,3 +20,8 @@ class DoublyLinkedList:
             new_node.previous_node = self.last_node
             self.last_node.next_node = new_node
             self.last_node = new_node
+    def print_all_reverse(self):
+        current_node = self.last_node
+        while current_node is not None:
+            print(current_node.data)
+            current_node = current_node.previous_node
