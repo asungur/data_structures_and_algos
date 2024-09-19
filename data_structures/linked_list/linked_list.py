@@ -62,7 +62,11 @@ class LinkedList:
             current_index += 1
         node_after_deleted_node = current_node.next_node.next_node
         current_node.next_node = node_after_deleted_node
-
+    def print_all(self):
+        current_node = self.first_node
+        while current_node is not None:
+            print(current_node.data)
+            current_node = current_node.next_node
 
 node_1 = Node("once")
 node_2 = Node("upon")
@@ -73,7 +77,8 @@ node_2.next_node = node_3
 node_3.next_node = node_4
 list = LinkedList(node_1)
 # print(list.read(2))
-print(list.insert_at_index(3, "baklava"))
-print(list.index_of("baklava"))
-list.delete_at_index(3)
-print(list.index_of("time"))
+# print(list.insert_at_index(3, "baklava"))
+# print(list.index_of("baklava"))
+# list.delete_at_index(3)
+# print(list.index_of("time"))
+list.print_all()
