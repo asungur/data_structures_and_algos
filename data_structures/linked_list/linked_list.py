@@ -72,6 +72,16 @@ class LinkedList:
         while current_node.next_node is not None:
             current_node = current_node.next_node
         return current_node
+    def reverse(self):
+        previous_node = None
+        current_node = self.first_node
+        while current_node:
+            upcoming_node = current_node.next_node
+            current_node.next_node = previous_node
+            previous_node = current_node
+            current_node = upcoming_node
+        self.first_node = previous_node
+
 
 node_1 = Node("once")
 node_2 = Node("upon")
@@ -86,4 +96,6 @@ list = LinkedList(node_1)
 # print(list.index_of("baklava"))
 # list.delete_at_index(3)
 # print(list.index_of("time"))
-print(list.last().data)
+# list.print_all()
+list.reverse()
+list.print_all()
