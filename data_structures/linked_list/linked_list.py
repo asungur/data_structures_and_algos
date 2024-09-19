@@ -67,6 +67,11 @@ class LinkedList:
         while current_node is not None:
             print(current_node.data)
             current_node = current_node.next_node
+    def last(self):
+        current_node = self.first_node
+        while current_node.next_node is not None:
+            current_node = current_node.next_node
+        return current_node
 
 node_1 = Node("once")
 node_2 = Node("upon")
@@ -81,4 +86,4 @@ list = LinkedList(node_1)
 # print(list.index_of("baklava"))
 # list.delete_at_index(3)
 # print(list.index_of("time"))
-list.print_all()
+print(list.last().data)
