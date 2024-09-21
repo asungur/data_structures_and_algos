@@ -58,6 +58,13 @@ def lift(node, nodeToDelete):
         nodeToDelete.value = node.value
         return node.rightChild
 
+def traverse_and_print(node):
+    if node is None:
+        return
+    traverse_and_print(node.leftChild)
+    print(node.value)
+    traverse_and_print(node.rightChild)
+
 node1 = TreeNode(25)
 node2 = TreeNode(75)
 root = TreeNode(50, node1, node2)
