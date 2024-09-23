@@ -65,6 +65,11 @@ def traverse_and_print(node):
     print(node.value)
     traverse_and_print(node.rightChild)
 
+def find_greatest(node):
+    if node.rightChild is None:
+        return node.value
+    return find_greatest(node.rightChild)
+
 node1 = TreeNode(25)
 node2 = TreeNode(75)
 root = TreeNode(50, node1, node2)
