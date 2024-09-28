@@ -32,3 +32,39 @@ class Heap:
             # Update the node index:
             new_node_index = self.parent_index(new_node_index)
 
+    def delete(self):
+        value_to_delete = self.root_node()
+
+        # Make the last node root node
+        self.data[0] = self.data.pop()
+        trickle_node_index = 0
+
+        # Execute trickle down algo:
+        while self.has_greater_child(trickle_node_index):
+            # Save larger child index in variable:
+            larger_child_index = self.calculate_larger_child_index(trickle_node_index)
+
+            # Swap the trickle node with its larger child:
+            self.data[trickle_node_index], self.data[larger_child_index] = self.data[larger_child_index], self.data[trickle_node_index]
+
+            # Update tricle node's new index:
+            trickle_node_index = larger_child_index
+
+        return value_to_delete
+
+    def has_greater_child(self, index):
+        # Check if there are both left and right child and they are larger:
+        return (self.data[self.left_child_index[index]] and self.data[self.left_child_index] > self.data[index]) or (self.data[self.right_child_index(index)] and self.data[self.right_child_index[index] > self.data[index]])
+
+    def calculate_larger_child_index(self, index):
+        # Overall, prioritise left direction:
+        # If there is not right child.
+        if not self.data[self.right_child_index(index)]:
+            return self.left_child_index(index)
+
+        # If right child value is greater than left child value:
+        if self.data[self.right_child_index(index)] > self.data[self.left_child_index(index)]:
+            return self.right_child_index(index)
+        else:
+            # Left child value is greater or equal to right child:
+            return self.left_child_index(index)
