@@ -13,3 +13,6 @@ def selection_sort(arr):
         # Swap numbers
         sorted_arr[i], sorted_arr[lowest_num_idx] = sorted_arr[lowest_num_idx], sorted_arr[i]
     return sorted_arr
+
+
+print(selection_sort([65, 55, 45, 35, 25, 15, 10]))
