@@ -54,7 +54,7 @@ def lift(node, nodeToDelete):
         node.leftChild = lift(node.leftChild, nodeToDelete)
         return node
     else:
-        # If no leftChild, you reacheD to the successor node. Take its value and lift
+        # If no leftChild, you reached to the successor node. Take its value and lift
         nodeToDelete.value = node.value
         return node.rightChild
 
