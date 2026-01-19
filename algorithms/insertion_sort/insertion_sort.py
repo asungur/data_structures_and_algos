@@ -12,3 +12,5 @@ def insertion_sort(arr):
             else:
                 break
         arr[position + 1] = temp
+
+print(insertion_sort([65, 55, 45, 35, 25, 15, 10]))
