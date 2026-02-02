@@ -1,84 +1,73 @@
-# Example is based on travelling from Atlanta to El Paso
-class City:
+# This example represents an unweighted graph.
+class User:
     def __init__(self, name):
         self.name = name
-        self.routes = {}
-    def add_route(self, city, price):
-        self.routes[city] = price
+        self.friends = []
+        
+    def add_friend(self, friend):
+        self.friends.append(friend)
+        if self not in friend.friends:
+            friend.add_friend(self)
+    def show_friends(self):
+        return [friend.name for friend in self.friends]
 
-atlanta = City("Atlanta")
-boston = City("Boston")
-chicago = City("Chicago")
-denver = City("Denver")
-el_paso = City("El Paso")
-atlanta.add_route(boston, 100)
-atlanta.add_route(denver, 160)
-boston.add_route(chicago, 120)
-boston.add_route(denver, 180)
-chicago.add_route(el_paso, 80)
-denver.add_route(chicago, 40)
-denver.add_route(el_paso, 140)
-el_paso.add_route(boston, 100)
+idris = User("Idris")
+talia = User("Talia")
+kamil = User("Kamil")
+ken = User("Ken")
+lina = User("Lina")
+marco = User("Marco")
+sasha = User("Sasha")
 
-def dijkstra_shortest_path(starting_city, final_destination):
-    cheapest_prices_table = {}
-    cheapest_previous_stopover_city_table = {}
-    # Use set to keep track of visited and unvisited cities
-    unvisited_cities = set()
-    visited_cities = set()
-    # We add the starting city's name as the first key inside the
-    # cheapest_prices_table. It has a value of 0, since it costs nothing
-    # to get there:
-    cheapest_prices_table[starting_city.name] = 0
-    current_city = starting_city
-    # Core algorithm. It runs as long as we can visit a city that we haven't visited yet:
-    while current_city:
-        # We add the current_city's name to the visited_cities set to record that we've officially visited it.
-        # We also remove it from the list of unvisited cities:
-        visited_cities.add(current_city.name)
-        unvisited_cities.remove(current_city.name)
-            
-        # We iterate over each of the current_city's adjacent cities:
-        for adjacent_city, price in current_city.routes.items():
-            # If we've discovered a new city,
-            # we add it to the list of unvisited_cities:
-            if adjacent_city.name not in visited_cities:
-                unvisited_cities.add(adjacent_city.name)
-            # We calculate the price of getting from the STARTING city to the
-            # ADJACENT city using the CURRENT city as the second-to-last stop:
-            price_through_current_city = cheapest_prices_table[current_city.name] + price
-            # If the price from the STARTING city to the ADJACENT city is
-            # the cheapest one we've found so far...
-            if adjacent_city.name not in cheapest_prices_table or price_through_current_city < cheapest_prices_table[adjacent_city.name]:
-                # ... we update our two tables:
-                cheapest_prices_table[adjacent_city.name] = price_through_current_city
-                cheapest_previous_stopover_city_table[adjacent_city.name] = current_city.name
+idris.add_friend(talia)
+talia.add_friend(ken)
+ken.add_friend(marco)
+marco.add_friend(sasha)
+sasha.add_friend(lina)
+lina.add_friend(kamil)
+kamil.add_friend(idris)
 
-        # We visit our next unvisited city. We choose the one that is cheapest
-        # to get to from the STARTING city:
-        current_city = min(unvisited_cities, key=lambda city: cheapest_prices_table[city.name])
+# print(idris.show_friends())  # Output: ['Talia', 'Kamil']
+# print(talia.show_friends())  # Output: ['Idris', 'Ken']
+# print(ken.show_friends())  # Output: ['Idris', 'Marco']
+# print(marco.show_friends())  # Output: ['Ken', 'Sasha']
+# print(sasha.show_friends())  # Output: ['Marco', 'Lina']
+# print(lina.show_friends())  # Output: ['Sasha', 'Kamil']
+# print(kamil.show_friends())  # Output: ['Lina', 'Idris']
+
+def dijkstra_shortest_path(starting_user, target_user):
+    shortest_connections_table = {}
+    shortest_previous_user_table = {}
+    unvisited_users = set()
+    visited_users = set()
     
-    # We have completed the core algorithm. At this point, the
-    # cheapest_prices_table contains all the cheapest prices to get to each
-    # city from the starting city. However, to calculate the precise path
-    # to take from our starting city to our final destination,
-    # we need to move on.
-    # We'll build the shortest path using a simple array:
+    shortest_connections_table[starting_user.name] = 0
+    current_user = starting_user
+    while current_user:
+        visited_users.add(current_user.name)
+        if current_user in unvisited_users:
+            unvisited_users.remove(current_user)
+        
+        for friend in current_user.friends:
+            if friend.name not in visited_users:
+                unvisited_users.add(friend)
+            connections_through_current_user = shortest_connections_table[current_user.name] + 1
+            if friend.name not in shortest_connections_table or connections_through_current_user < shortest_connections_table[friend.name]:
+                shortest_connections_table[friend.name] = connections_through_current_user
+                shortest_previous_user_table[friend.name] = current_user.name
+        
+        current_user = min(unvisited_users, key=lambda user: shortest_connections_table[user.name]) if unvisited_users else None
+        
     shortest_path = []
-    # To construct the shortest path, we need to work backwards from our
-    # final destination. So, we begin with the final destination as our
-    # current_city_name:
-    current_city_name = final_destination.name
-    # We loop until we reach our starting city:
-    while current_city_name != starting_city.name:
-        # We add each current_city_name we encounter to the shortest path array:
-        shortest_path.append(current_city_name)
-        # We use the cheapest_previous_stopover_city_table to follow each city
-        # to its previous stopover city:
-        current_city_name = cheapest_previous_stopover_city_table[current_city_name]
+    current_user_name = target_user.name
+    while current_user_name != starting_user.name:
+        shortest_path.append(current_user_name)
+        current_user_name = shortest_previous_user_table[current_user_name]
     
-    # We cap things off by adding the starting city to the shortest path:
-    shortest_path.append(starting_city.name)
-    # We reverse the output so we can see the path from beginning to end:
+
+    shortest_path.append(starting_user.name)
     shortest_path.reverse()
     return shortest_path
+
+
+print(dijkstra_shortest_path(idris, lina))
