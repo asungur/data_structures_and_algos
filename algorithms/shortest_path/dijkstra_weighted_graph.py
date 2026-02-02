@@ -37,14 +37,15 @@ def dijkstra_shortest_path(starting_city, final_destination):
         # We add the current_city's name to the visited_cities set to record that we've officially visited it.
         # We also remove it from the list of unvisited cities:
         visited_cities.add(current_city.name)
-        unvisited_cities.remove(current_city.name)
+        if current_city in unvisited_cities:
+            unvisited_cities.remove(current_city)
             
         # We iterate over each of the current_city's adjacent cities:
         for adjacent_city, price in current_city.routes.items():
             # If we've discovered a new city,
             # we add it to the list of unvisited_cities:
             if adjacent_city.name not in visited_cities:
-                unvisited_cities.add(adjacent_city.name)
+                unvisited_cities.add(adjacent_city)
             # We calculate the price of getting from the STARTING city to the
             # ADJACENT city using the CURRENT city as the second-to-last stop:
             price_through_current_city = cheapest_prices_table[current_city.name] + price
@@ -57,7 +58,7 @@ def dijkstra_shortest_path(starting_city, final_destination):
 
         # We visit our next unvisited city. We choose the one that is cheapest
         # to get to from the STARTING city:
-        current_city = min(unvisited_cities, key=lambda city: cheapest_prices_table[city.name])
+        current_city = min(unvisited_cities, key=lambda city: cheapest_prices_table[city.name]) if unvisited_cities else None
     
     # We have completed the core algorithm. At this point, the
     # cheapest_prices_table contains all the cheapest prices to get to each
@@ -83,3 +84,5 @@ def dijkstra_shortest_path(starting_city, final_destination):
     # We reverse the output so we can see the path from beginning to end:
     shortest_path.reverse()
     return shortest_path
+
+print(dijkstra_shortest_path(atlanta, el_paso))  # Output: ['Atlanta', 'Denver', 'Chicago', 'El Paso']
